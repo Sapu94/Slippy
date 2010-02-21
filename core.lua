@@ -125,20 +125,6 @@ local options = {
     },
 }
 
--- dataTbl = {
-    -- quantity = #, -- total number of items, including stacked
-    -- onlyPlayer = true/false, -- Is the player the only one with items up
-    -- records = { -- List of all items, by price per item. Multiple auctions at the same *per price* level and from the same person are merged
-        -- {
-            -- buyout = #, -- Buyout in copper, per item
-            -- bid = #, -- Bid in copper, per item
-            -- owner = "foo", -- Name 
-            -- quantity = #, -- How many total are up at this tier/owner
-            -- isPlayer = true/false,
-        -- },
-    -- },
--- }
-
 -- Called when the addon is loaded
 function Slippy:OnInitialize()
 	self:Print("Loaded Slippy v" .. Slippyversion .. "!")
@@ -384,19 +370,19 @@ function Slippy:ResetData()	-- resets all of the data when the "Reset Craft Queu
 	self:Print("Craft Queue Reset")
 end
 
-function Slippy:GetQAData(group, index)
+function Slippy:GetQAData(slot, index)
 	local num
 
-	if group == 1 then num = twoH[13][index]
-	elseif group == 2 then num = boots[13][index]
-	elseif group == 3 then num = bracers[13][index]
-	elseif group == 4 then num = chest[13][index]
-	elseif group == 5 then num = cloak[13][index]
-	elseif group == 6 then num = gloves[13][index]
-	elseif group == 7 then num = shield[13][index]
-	elseif group == 8 then num = staff[13][index]
-	elseif group == 9 then num = weapon[13][index]
-	else self:Print("Error in Slippy:GetQAData - Could not determine group.")
+	if slot == 1 then num = twoH[13][index]
+	elseif slot == 2 then num = boots[13][index]
+	elseif slot == 3 then num = bracers[13][index]
+	elseif slot == 4 then num = chest[13][index]
+	elseif slot == 5 then num = cloak[13][index]
+	elseif slot == 6 then num = gloves[13][index]
+	elseif slot == 7 then num = shield[13][index]
+	elseif slot == 8 then num = staff[13][index]
+	elseif slot == 9 then num = weapon[13][index]
+	else self:Print("Error in Slippy:GetQAData - Could not determine the slot.")
 	end
 	
 	local sName, sLink = GetItemInfo(num)
