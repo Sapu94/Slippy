@@ -164,7 +164,8 @@ function Slippy:ChatCommand(input)
 		InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
 	elseif input == "test" then -- for testing out QA integration
 		local dataTbl = Slippy:GetQAData(8, 1)
-		self:Print(dataTbl.quantity)
+		self:Print(dataTbl.quantity) --TESTING
+		--TESTING
 	elseif input == "summary" then	-- '/sl summary' opens up the main window
 		frame:Show()
 		tab:SelectTab("tab1")
