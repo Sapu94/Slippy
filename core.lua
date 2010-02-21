@@ -162,9 +162,9 @@ function Slippy:OnDisable() end
 function Slippy:ChatCommand(input)
 	if input == "config" then	-- '/sl config' opens up the options window
 		InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
-	elseif input == "test" then -- for testing out QA integration
-		local dataTbl = Slippy:GetQAData(8, 1)
-		self:Print(dataTbl.quantity)
+	-- elseif input == "test" then -- for testing out QA integration
+		-- local dataTbl = Slippy:GetQAData(8, 1)
+		-- self:Print(dataTbl.quantity)
 	elseif input == "summary" then	-- '/sl summary' opens up the main window
 		frame:Show()
 		tab:SelectTab("tab1")
