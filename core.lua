@@ -158,30 +158,11 @@ function Slippy:OnEnable() end
 -- Called when the addon is disabled - for possible future use
 function Slippy:OnDisable() end
 
-function Slippy:GetQAData(group, index)
-	local num
-
-	if group == 1 then num = twoH[13][index]
-	elseif group == 2 then num = boots[13][index]
-	elseif group == 3 then num = bracers[13][index]
-	elseif group == 4 then num = chest[13][index]
-	elseif group == 5 then num = cloak[13][index]
-	elseif group == 6 then num = gloves[13][index]
-	elseif group == 7 then num = shield[13][index]
-	elseif group == 8 then num = staff[13][index]
-	elseif group == 9 then num = weapon[13][index]
-	else self:Print("Error in Slippy:GetQAData - Could not determine group.")
-	end
-	
-	local sName, sLink = GetItemInfo(num)
-	return QAAPI:GetData(sLink)
-end
-
 -- deals with slash commands
 function Slippy:ChatCommand(input)
 	if input == "config" then	-- '/sl config' opens up the options window
 		InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
-	elseif input == "test" then
+	elseif input == "test" then -- for testing out QA integration
 		local dataTbl = Slippy:GetQAData(8, 1)
 		self:Print(dataTbl.quantity)
 	elseif input == "summary" then	-- '/sl summary' opens up the main window
@@ -401,4 +382,23 @@ function Slippy:ResetData()	-- resets all of the data when the "Reset Craft Queu
 	
 	frame2:Hide()
 	self:Print("Craft Queue Reset")
+end
+
+function Slippy:GetQAData(group, index)
+	local num
+
+	if group == 1 then num = twoH[13][index]
+	elseif group == 2 then num = boots[13][index]
+	elseif group == 3 then num = bracers[13][index]
+	elseif group == 4 then num = chest[13][index]
+	elseif group == 5 then num = cloak[13][index]
+	elseif group == 6 then num = gloves[13][index]
+	elseif group == 7 then num = shield[13][index]
+	elseif group == 8 then num = staff[13][index]
+	elseif group == 9 then num = weapon[13][index]
+	else self:Print("Error in Slippy:GetQAData - Could not determine group.")
+	end
+	
+	local sName, sLink = GetItemInfo(num)
+	return QAAPI:GetData(sLink)
 end
