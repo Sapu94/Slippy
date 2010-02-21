@@ -1,0 +1,29 @@
+Slippy now uses the QAAPI (part of /QuickAuctions/modules/scan.lua) to get scan data from Quick Auctions 3.
+The version of QA3 that contains this API will not go live until WoW client patch 3.3.3.
+
+In order to allow Slippy to use the QAAPI before it goes live, you must make the following modifications
+to your version of Quick Auctions:
+
+1. Navigate to the QuickAuctions directory inside your /World of Warcraft/Interface/Addons folder.
+2. Open up the modeules folder.
+3. Open scan.lua in an editor (Notepad will work fine).
+4. Add the following code to the very end of the file:
+
+-- Simple data API
+QAAPI = {}
+function QAAPI:GetData(itemLink)
+	if( not itemLink ) then return end
+	itemLink = QuickAuctions:GetSafeLink(itemLink)
+ 
+	return auctionData[itemLink]
+end
+
+
+5. File->Save to save the changes. You should now see "Loaded Slippy v1.4 and QAAPI successfully!"
+and all QAAPI features should be enabled and work properly when you log into wow with Slippy enabled.
+
+
+If you encounter any errors or you have performed these steps and are still getting a warning message,
+please leave a comment detailing your error / problems at:
+
+wow.curse.com/downloads/wow-addons/details/slippy.aspx

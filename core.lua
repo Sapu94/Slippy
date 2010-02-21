@@ -1,7 +1,7 @@
 -- TODO LIST (in no particular order):
 --	overall:
 --		1. Make sure all of the included librarys are getting used and get rid of any that aren't.
---		2. Incorperate more with Quick Auctions: mat cost, craft queue, scroll selling price.
+--		2. Incorperate more with Quick Auctions: mat cost / scroll selling price.
 --		3. Have the queue be refreshed when an enchant is cast and remove that enchant from the list.
 --		4. Who doesn't love localizations?!
 --		5. Look into better splitting up the files.
@@ -20,6 +20,7 @@
 Slippy = LibStub("AceAddon-3.0"):NewAddon("Slippy", "AceConsole-3.0", "AceEvent-3.0")
 AceGUI = LibStub("AceGUI-3.0")
 Slippyversion = "1.4" -- current version of the addon
+local QAAPI_STATUS
 
 -- default values for the different material costs for new profiles in SlippyDB
 Slippydefaults = {
@@ -127,8 +128,7 @@ local options = {
 
 -- Called when the addon is loaded
 function Slippy:OnInitialize()
-	self:Print("Loaded Slippy v" .. Slippyversion .. "!")
-    db = LibStub:GetLibrary("AceDB-3.0"):New("SlippyDB", Slippydefaults, true)
+	db = LibStub:GetLibrary("AceDB-3.0"):New("SlippyDB", Slippydefaults, true)
 	
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("Slippy", options)
     self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("Slippy", "Slippy")
@@ -136,6 +136,19 @@ function Slippy:OnInitialize()
     self:RegisterChatCommand("slippy", "ChatCommand")
 	frame:Hide()
 	frame2:Hide()
+	
+	--checks to make sure that the command QAAPI:GetData exists and warns the user if it doesn't.
+	--will later automatically disable components that rely on the QAAPI to avoid errors.
+	if pcall(function() QAAPI:GetData() end) then 
+		QAAPI_STATUS = true
+		self:Print("Loaded Slippy v" .. Slippyversion .. " and QAAPI successfully!")
+	else
+		self:Print("Loaded Slippy v" .. Slippyversion .. "!")
+		self:Print("Warning: Your version of Quick Auctions does not support the QAAPI.")
+		self:Print("All QAAPI-related features have been disabled.")
+		self:Print("Please read the README file in the Slippy directory for more information.")
+		QAAPI_STATUS = false
+	end
 end
 
 -- Called when the addon is enabled - for possible future use
@@ -148,9 +161,6 @@ function Slippy:OnDisable() end
 function Slippy:ChatCommand(input)
 	if input == "config" then	-- '/sl config' opens up the options window
 		InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
-	elseif input == "test" then -- for testing out QA integration
-		local dataTbl = Slippy:GetQAData(8, 1)
-		self:Print(dataTbl.quantity)
 	elseif input == "summary" then	-- '/sl summary' opens up the main window
 		frame:Show()
 		tab:SelectTab("tab1")
@@ -337,14 +347,16 @@ function Slippy:Calctotals()
 	db.profile.totals[13] = db.profile.totals[12] + db.profile.totals[11]
 end
 
-function Slippy:BooleanToNumber(value)	-- simple function to convert true->1 and false->0
+-- simple function to convert true->1 and false->0
+function Slippy:BooleanToNumber(value)
 	if value then return 1
 	elseif not value then return 0
 	else print("Error: BooleanToNumber could not determine value")
 	end
 end
 
-function Slippy:ResetData()	-- resets all of the data when the "Reset Craft Queue" button is pressed
+-- resets all of the data when the "Reset Craft Queue" button is pressed
+function Slippy:ResetData()
 	queue[0]:SetText("You currently have no enchants in the queue.")
 
 	staff[1] = {false, false}
@@ -370,21 +382,31 @@ function Slippy:ResetData()	-- resets all of the data when the "Reset Craft Queu
 	self:Print("Craft Queue Reset")
 end
 
+-- Allows an easy to use interface with the Quick Auctions API
+-- The parameters are the slot for the enchant (boots, gloves, shield, etc)
+-- and the index of the item (ex. boots[][#])
+-- Returns a table with the following information (assuming you return into a variable called dataTbl):
+-- dataTbl = {
+    -- quantity = #, -- total number of items, including stacked
+    -- onlyPlayer = true/false, -- Is the player the only one with items up
+    -- records = { -- List of all items, by price per item. Multiple auctions at the same *per price* level and from the same person are merged
+        -- {
+            -- buyout = #, -- Buyout in copper, per item
+            -- bid = #, -- Bid in copper, per item
+            -- owner = "foo", -- Name 
+            -- quantity = #, -- How many total are up at this tier/owner
+            -- isPlayer = true/false,
+        -- },
+    -- },
+-- }
 function Slippy:GetQAData(slot, index)
-	local num
-
-	if slot == 1 then num = twoH[13][index]
-	elseif slot == 2 then num = boots[13][index]
-	elseif slot == 3 then num = bracers[13][index]
-	elseif slot == 4 then num = chest[13][index]
-	elseif slot == 5 then num = cloak[13][index]
-	elseif slot == 6 then num = gloves[13][index]
-	elseif slot == 7 then num = shield[13][index]
-	elseif slot == 8 then num = staff[13][index]
-	elseif slot == 9 then num = weapon[13][index]
-	else self:Print("Error in Slippy:GetQAData - Could not determine the slot.")
-	end
-	
-	local sName, sLink = GetItemInfo(num)
+	local sName, sLink = GetItemInfo(slippyData[slot][13][index])
 	return QAAPI:GetData(sLink)
+end
+
+-- converts an itemID into the name of the item. For example,
+-- Slippy:GetItemName(boots[13][1]) returns "Scroll of Enchant Boots - Icewalker"
+function Slippy:GetItemName(sItemID)
+	local sName = GetItemInfo(sItemID)
+	return sName
 end

@@ -4,6 +4,7 @@
 ## Author: Sapu94(Project Manager), Brusalk(Lead Contributor)
 ## Version: 1.2
 ## SavedVariables: SlippyDB
+## OptionalDeps: QuickAuctions
 
 Libs\AceGUI-3.0\AceGUI-3.0.xml
 Libs\LibStub\LibStub.lua

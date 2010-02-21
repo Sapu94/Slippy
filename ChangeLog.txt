@@ -1,3 +1,16 @@
+v1.4	-Quick Auctions API implemented!
+	-Wrote functions to deal with the QAAPI as well as deal with itemLinks.
+	-Added a new row to all the data arrays where the itemID of the scroll is stored.
+	-Added slippyData which will eventually replace the 9 individual data tables. For now,
+	it simply contains the 9 data tables which allows them to be acessed in the same manner
+	as before as well as through the slippyData array without conflict.
+	-Converted everything inside of the core.lua file to use slippyData instead of the old arrays.
+	-Matched the order of the arrays in data.lua to the rest of the program for consistency.
+	-Added a warning if QAAPI is not loaded (currently does not do anything besides print the warning).
+
+v1.3	-Multiple adjustments to the core.lua file to improve the code.
+	-More variables defined as locals and some variables renamed / moved as a result.
+
 v1.2	-Added new rows for the arrays in data.lua to handle extra materials. As a result,
 	everything that used these arrays was updated (mainly core.lua).
 	-Stored the totals in the DB. As a result everything that used the totals array was updated (mainly gui.lua).
