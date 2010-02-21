@@ -19,7 +19,7 @@
 
 Slippy = LibStub("AceAddon-3.0"):NewAddon("Slippy", "AceConsole-3.0", "AceEvent-3.0")
 AceGUI = LibStub("AceGUI-3.0")
-Slippyversion = "1.2" -- current version of the addon
+Slippyversion = "1.4" -- current version of the addon
 
 -- default values for the different material costs for new profiles in SlippyDB
 Slippydefaults = {
@@ -164,8 +164,7 @@ function Slippy:ChatCommand(input)
 		InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
 	elseif input == "test" then -- for testing out QA integration
 		local dataTbl = Slippy:GetQAData(8, 1)
-		self:Print(dataTbl.quantity) --TESTING
-		--TESTING
+		self:Print(dataTbl.quantity)
 	elseif input == "summary" then	-- '/sl summary' opens up the main window
 		frame:Show()
 		tab:SelectTab("tab1")
