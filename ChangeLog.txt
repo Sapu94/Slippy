@@ -1,0 +1,13 @@
+v1.2	-Added new rows for the arrays in data.lua to handle extra materials. As a result,
+	everything that used these arrays was updated (mainly core.lua).
+	-Stored the totals in the DB. As a result everything that used the totals array was updated (mainly gui.lua).
+	-Improved the slash commands greater by making "/sl" print out list of slash commands.
+	-Added an option to enable / disabled vellums.
+	-Cleaned up the core.lua code by putting the Get and Set function for the options in the options function.
+	-Moved the default profile values to the data.lua file.
+
+v1.1 	-Fixed a bug where glove enchants were not being reset when the "Reset Craft Queue" button was pressed.
+	-Greatly improved the documentation of the code by adding comments throughout.
+	-Cleaned up the code overall by getting rid of unused/unncessary functions/variables.
+
+v1.0 	-First Release Version!
