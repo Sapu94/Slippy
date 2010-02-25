@@ -41,102 +41,94 @@ Slippydefaults = {
 }
 
 -- options frame
-local options = {
-    name = "Slippy",
-    handler = Slippy,
-    type = "group",
-    args = {
-		infiniteDust = {
-            type = "input",
-            name = "Infinite Dust",
-            desc = "The cost of 1 infinite dust in gold",
-            get = function(info) return db.profile.dust end,
-            set = function(info, val) db.profile.dust=val end,
-        },
-		gce = {
-            type = "input",
-            name = "Greater Cosmic Essence",
-            desc = "The cost of 1 greater cosmic essence in gold",
-            get = function(info) return db.profile.gce end,
-            set = function(info, val) db.profile.gce=val end,
-        },
-		lce = {
-            type = "input",
-            name = "Lesser Cosmic Essence",
-            desc = "The cost of 1 lesser cosmic essence in gold",
-            get = function(info) return db.profile.lce end,
-            set = function(info, val) db.profile.lce=val end,
-        },
-		dream = {
-            type = "input",
-            name = "Dream Shard",
-            desc = "The cost of 1 dream shard in gold",
-            get = function(info) return db.profile.dream end,
-            set = function(info, val) db.profile.dream=val end,
-        },
-		abyss = {
-            type = "input",
-            name = "Abyss Crystal",
-            desc = "The cost of 1 abyss crystal in gold",
-            get = function(info) return db.profile.abyss end,
-            set = function(info, val) db.profile.abyss=val end,
-        },
-		titanium = {
-            type = "input",
-            name = "Titanium Bar",
-            desc = "The cost of 1 Titanium Bar in gold",
-            get = function(info) return db.profile.titanium end,
-            set = function(info, val) db.profile.titanium=val end,
-        },
-		water = {
-            type = "input",
-            name = "Crystallized Water",
-            desc = "The cost of 1 Crystallized Water in gold",
-            get = function(info) return db.profile.water end,
-            set = function(info, val) db.profile.water=val end,
-        },
-		earth = {
-            type = "input",
-            name = "Eternal Earth",
-            desc = "The cost of 1 eternal earth in gold",
-            get = function(info) return db.profile.earth end,
-            set = function(info, val) db.profile.earth=val end,
-        },
-		air = {
-            type = "input",
-            name = "Eternal Air",
-            desc = "The cost of 1 eternal air in gold",
-            get = function(info) return db.profile.air end,
-            set = function(info, val) db.profile.air=val end,
-        },
-		titansteel = {
-            type = "input",
-            name = "Titansteel Bar",
-            desc = "The cost of 1 titansteel bar in gold",
-            get = function(info) return db.profile.titansteel end,
-            set = function(info, val) db.profile.titansteel=val end,
-        },
-		vellum = {
-            type = "toggle",
-            name = "Show Vellums",
-            desc = "Toggles showing vellums in the totals window (on/off).",
-            get = function(info) return db.profile.vellum end,
-            set = function(info, val) db.profile.vellum=val end,
-        },
-    },
-}
+-- local options = {
+    -- name = "Slippy",
+    -- handler = Slippy,
+    -- type = "group",
+    -- args = {
+		-- infiniteDust = {
+            -- type = "input",
+            -- name = "Infinite Dust",
+            -- desc = "The cost of 1 infinite dust in gold",
+            -- get = function(info) return db.profile.dust end,
+            -- set = function(info, val) db.profile.dust=val end,
+        -- },
+		-- gce = {
+            -- type = "input",
+            -- name = "Greater Cosmic Essence",
+            -- desc = "The cost of 1 greater cosmic essence in gold",
+            -- get = function(info) return db.profile.gce end,
+            -- set = function(info, val) db.profile.gce=val end,
+        -- },
+		-- lce = {
+            -- type = "input",
+            -- name = "Lesser Cosmic Essence",
+            -- desc = "The cost of 1 lesser cosmic essence in gold",
+            -- get = function(info) return db.profile.lce end,
+            -- set = function(info, val) db.profile.lce=val end,
+        -- },
+		-- dream = {
+            -- type = "input",
+            -- name = "Dream Shard",
+            -- desc = "The cost of 1 dream shard in gold",
+            -- get = function(info) return db.profile.dream end,
+            -- set = function(info, val) db.profile.dream=val end,
+        -- },
+		-- abyss = {
+            -- type = "input",
+            -- name = "Abyss Crystal",
+            -- desc = "The cost of 1 abyss crystal in gold",
+            -- get = function(info) return db.profile.abyss end,
+            -- set = function(info, val) db.profile.abyss=val end,
+        -- },
+		-- titanium = {
+            -- type = "input",
+            -- name = "Titanium Bar",
+            -- desc = "The cost of 1 Titanium Bar in gold",
+            -- get = function(info) return db.profile.titanium end,
+            -- set = function(info, val) db.profile.titanium=val end,
+        -- },
+		-- water = {
+            -- type = "input",
+            -- name = "Crystallized Water",
+            -- desc = "The cost of 1 Crystallized Water in gold",
+            -- get = function(info) return db.profile.water end,
+            -- set = function(info, val) db.profile.water=val end,
+        -- },
+		-- earth = {
+            -- type = "input",
+            -- name = "Eternal Earth",
+            -- desc = "The cost of 1 eternal earth in gold",
+            -- get = function(info) return db.profile.earth end,
+            -- set = function(info, val) db.profile.earth=val end,
+        -- },
+		-- air = {
+            -- type = "input",
+            -- name = "Eternal Air",
+            -- desc = "The cost of 1 eternal air in gold",
+            -- get = function(info) return db.profile.air end,
+            -- set = function(info, val) db.profile.air=val end,
+        -- },
+		-- titansteel = {
+            -- type = "input",
+            -- name = "Titansteel Bar",
+            -- desc = "The cost of 1 titansteel bar in gold",
+            -- get = function(info) return db.profile.titansteel end,
+            -- set = function(info, val) db.profile.titansteel=val end,
+        -- },
+		-- vellum = {
+            -- type = "toggle",
+            -- name = "Show Vellums",
+            -- desc = "Toggles showing vellums in the totals window (on/off).",
+            -- get = function(info) return db.profile.vellum end,
+            -- set = function(info, val) db.profile.vellum=val end,
+        -- },
+    -- },
+-- }
 
 -- Called when the addon is loaded
 function Slippy:OnInitialize()
 	db = LibStub:GetLibrary("AceDB-3.0"):New("SlippyDB", Slippydefaults, true)
-	
-	LibStub("AceConfig-3.0"):RegisterOptionsTable("Slippy", options)
-    self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("Slippy", "Slippy")
-    self:RegisterChatCommand("sl", "ChatCommand")
-    self:RegisterChatCommand("slippy", "ChatCommand")
-	frame:Hide()
-	frame2:Hide()
-	
 	--checks to make sure that the command QAAPI:GetData exists and warns the user if it doesn't.
 	--will later automatically disable components that rely on the QAAPI to avoid errors.
 	if pcall(function() QAAPI:GetData() end) then 
@@ -149,6 +141,15 @@ function Slippy:OnInitialize()
 		self:Print("Please read the README file in the Slippy directory for more information.")
 		QAAPI_STATUS = false
 	end
+	
+	--LibStub("AceConfig-3.0"):RegisterOptionsTable("Slippy", options)
+    self:RegisterChatCommand("sl", "ChatCommand")
+    self:RegisterChatCommand("slippy", "ChatCommand")
+	Slippy:Register_Options_Frame() -- Loads options-table
+	Slippy_Frame_Shown_12356741 = "0"
+	Slippy:FrameToggle()
+	frame:Hide()
+	--frame2:Hide()
 end
 
 -- Called when the addon is enabled - for possible future use
@@ -168,6 +169,8 @@ function Slippy:ChatCommand(input)
 		Slippy:Calctotals()
 		frame2:Show()
 		tab2:SelectTab("tab21")
+	elseif input == "test" then
+		SlippyGUI_Background:Show()
 	else	-- if the command is unrecognized, print out the slash commands to help the user
         self:Print("Slash Commands:")
 		print("/sl summary - Opens window for viewing / selecting enchants.")
@@ -377,8 +380,6 @@ function Slippy:ResetData()
 	bracers[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0}
 	cloak[1] = {false, false, false, false, false, false, false, false, false}
 	cloak[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0}
-	
-	frame2:Hide()
 	self:Print("Craft Queue Reset")
 end
 

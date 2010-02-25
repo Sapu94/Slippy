@@ -1,4 +1,4 @@
-twoH = {}		-- has 2 entries
+local twoH = {}		-- has 2 entries
 twoH[0] = {"Greater Savagery","Massacre"}		-- name of enchant
 twoH[1] = {false, false}						-- status of checkbox - queued to be made? (true / false)
 twoH[2] = {6, 40}								-- infinite dust
@@ -14,7 +14,7 @@ twoH[11] = {0, 0}								-- titansteel bar
 twoH[12] = {0, 0}								-- cost
 twoH[13] = {38992, 44463}						-- ItemID
 
-boots = {}		-- has 8 entries
+local boots = {}		-- has 8 entries
 boots[0] = {"Icewalker", "Greater Spirit", "Greater Fortitude", "Superior Agility", "Greater Assault", "Assault",
 			"Tuskarr's Vitality", "Greater Vitality"}
 boots[1] = {false, false, false, false, false, false, false, false}
@@ -31,7 +31,7 @@ boots[11] = {0, 0, 0, 0, 0, 0, 0, 0}
 boots[12] = {0, 0, 0, 0, 0, 0, 0, 0}
 boots[13] = {38986, 38961, 38966, 38976, 44469, 44449, 39006, 38974}
 
-bracers = {}	-- has 9 entries
+local bracers = {}	-- has 9 entries
 bracers[0] = {"Superior Spellpower", "Greater Spellpower", "Greater Assault", "Major Stamina", "Major Spirit", "Striking",
 				"Exceptional Intellect", "Expertise", "Greater Stats"}
 bracers[1] = {false, false, false, false, false, false, false, false, false}
@@ -48,7 +48,7 @@ bracers[11] = {0, 0, 0, 0, 0, 0, 0, 0, 0}
 bracers[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0}
 bracers[13] = {44470, 38997, 44815, 44947, 38980, 38971, 38968, 38984, 38987}
 
-chest = {}		-- has 8 entries
+local chest = {}		-- has 8 entries
 chest[0] = {"Super Stats", "Powerful Stats", "Greater Defense", "Greater Mana Restoration", "Super Health", "Mighty Health",
 			"Exceptional Mana", "Exceptional Resilience"}
 chest[1] = {false, false, false, false, false, false, false, false}
@@ -65,7 +65,7 @@ chest[11] = {0, 0, 0, 0, 0, 0, 0, 0}
 chest[12] = {0, 0, 0, 0, 0, 0, 0, 0}
 chest[13] = {38989, 44465, 39002, 38962, 39005, 38955, 38912, 38975}
 
-cloak = {}		-- has 9 entries
+local cloak = {}		-- has 9 entries
 cloak[0] = {"Greater Speed", "Major Agility", "Mighty Armor", "Speed", "Titanweave", "Wisdom", "Superior Agility",
 			"Spell Piercing", "Shadow Armor"}
 cloak[1] = {false, false, false, false, false, false, false, false, false}
@@ -82,7 +82,7 @@ cloak[11] = {0, 0, 0, 0, 0, 0, 0, 0, 0}
 cloak[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0}
 cloak[13] = {39003, 44457, 39001, 44456, 38978, 39004, 38959, 38973, 38993}
 
-gloves = {}		-- has 7 entries
+local gloves = {}		-- has 7 entries
 gloves[0] = {"Exceptional Spellpower", "Crusher", "Precision", "Armsman", "Major Agility", "Greater Assault", "Expertise"}
 gloves[1] = {false, false, false, false, false, false, false}
 gloves[2] = {4, 20, 0, 0, 0, 6, 12}
@@ -98,7 +98,7 @@ gloves[11] = {0, 0, 0, 0, 0, 0, 0}
 gloves[12] = {0, 0, 0, 0, 0, 0, 0}
 gloves[13] = {38979, 44458, 38953, 38990, 38967, 38964, 38951}
 
-shield = {} 	-- has 2 entries
+local shield = {} 	-- has 2 entries
 shield[0] = {"Greater Intellect", "Defense"}
 shield[1] = {false, false}
 shield[2] = {12, 6}
@@ -114,7 +114,7 @@ shield[11] = {0, 0}
 shield[12] = {0, 0}
 shield[13] = {44455, 38954}
 
-staff = {}		-- has 2 entries
+local staff = {}		-- has 2 entries
 staff[0] = {"Greater Spellpower", "Spellpower"}
 staff[1] = {false, false}
 staff[2] = {40, 12}
@@ -130,7 +130,7 @@ staff[11] = {0, 0}
 staff[12] = {0, 0}
 staff[13] = {45056, 45060}
 
-weapon = {}		-- has 9 entries
+local weapon = {}		-- has 9 entries
 weapon[0] = {"Blade Ward", "Exceptional Spellpower", "Mighty Spellpower", "Berserking", "Greater Potency",
 			"Exceptional Agility", "Exceptional Spirit", "Accuracy", "Superior Potency"}
 weapon[1] = {false, false, false, false, false, false, false, false, false}
