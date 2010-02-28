@@ -19,7 +19,7 @@ function QAAPI:GetData(itemLink)
 end
 
 
-5. File->Save to save the changes. You should now see "Loaded Slippy v1.4 and QAAPI successfully!"
+5. File->Save to save the changes. You should now see "Loaded Slippy v1.5 and QAAPI successfully!"
 and all QAAPI features should be enabled and work properly when you log into wow with Slippy enabled.
 
 
