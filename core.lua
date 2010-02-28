@@ -11,7 +11,7 @@
 
 Slippy = LibStub("AceAddon-3.0"):NewAddon("Slippy", "AceConsole-3.0", "AceEvent-3.0")
 AceGUI = LibStub("AceGUI-3.0")
-Slippyversion = "1.4" -- current version of the addon
+Slippyversion = "1.5" -- current version of the addon
 local QAAPI_STATUS
 
 -- default values for the different material costs for new profiles in SlippyDB
@@ -42,7 +42,7 @@ function Slippy:OnInitialize()
 	else
 		self:Print("Loaded Slippy v" .. Slippyversion .. "!")
 		self:Print("Warning: Your version of Quick Auctions does not support the QAAPI.")
-		self:Print("All QAAPI-related features have been disabled.")
+		self:Print("Some features may be disabled or give errors.")
 		self:Print("Please read the README file in the Slippy directory for more information.")
 		QAAPI_STATUS = false
 	end
@@ -87,7 +87,7 @@ end
 function Slippy:Calc(slot)
 	-- table.getn returns the size of the table which here is the number of enchants in a slot
 	for i=1, table.getn(slippyData[slot][1]) do
-		slippyData[slot][12][i] = slippyData[slot][2][i] = slippyData[slot][2][i]*db.profile.dust
+		slippyData[slot][12][i] = slippyData[slot][2][i]*db.profile.dust
 			+ slippyData[slot][3][i]*db.profile.gce + slippyData[slot][4][i]*db.profile.lce
 			+ slippyData[slot][5][i]*db.profile.dream + slippyData[slot][6][i]*db.profile.abyss
 			+ slippyData[slot][7][i]*db.profile.titanium + slippyData[slot][8][i]*db.profile.water
@@ -112,7 +112,12 @@ function Slippy:Calctotals()
 	-- Also, for each enchant selected, 1 is added to the number of the respective vellum needed
 	-- to make an enchanting scroll for that enchant.
 	for k=1, 5 do
-		for i=1, 2 do
+		-- for j=1, 9 do
+			-- for i=1, table.getn(slippyData[j][1]) do
+				-- db.profile.totals[k] = db.profile.totals[k] + slippyData[j][k+1][i]*Slippy:BooleanToNumber(slippyData[j][1][i])
+			-- end
+		-- end
+		for i=1, table.getn(slippyData[7][1]) do
 			db.profile.totals[k] = db.profile.totals[k] + slippyData[8][k+1][i]*Slippy:BooleanToNumber(slippyData[8][1][i]) +
 				slippyData[7][k+1][i]*Slippy:BooleanToNumber(slippyData[7][1][i]) +
 				slippyData[1][k+1][i]*Slippy:BooleanToNumber(slippyData[1][1][i])
@@ -122,14 +127,14 @@ function Slippy:Calctotals()
 			end
 		end
 		
-		for i=1, 7 do
+		for i=1, table.getn(slippyData[6][1]) do
 			db.profile.totals[k] = db.profile.totals[k] + slippyData[6][k+1][i]*Slippy:BooleanToNumber(slippyData[6][1][i])
 			if k == 1 then
 				db.profile.totals[12] = db.profile.totals[12] + Slippy:BooleanToNumber(slippyData[6][1][i])
 			end
 		end
 		
-		for i=1, 8 do
+		for i=1, table.getn(slippyData[4][1]) do
 			db.profile.totals[k] = db.profile.totals[k] + slippyData[2][k+1][i]*Slippy:BooleanToNumber(slippyData[2][1][i]) +
 				slippyData[4][k+1][i]*Slippy:BooleanToNumber(slippyData[4][1][i])
 			if k == 1 then
@@ -137,7 +142,7 @@ function Slippy:Calctotals()
 			end
 		end
 		
-		for i=1, 9 do
+		for i=1, table.getn(slippyData[5][1]) do
 			db.profile.totals[k] = db.profile.totals[k] + slippyData[9][k+1][i]*Slippy:BooleanToNumber(slippyData[9][1][i]) +
 				slippyData[5][k+1][i]*Slippy:BooleanToNumber(slippyData[5][1][i]) +
 				slippyData[3][k+1][i]*Slippy:BooleanToNumber(slippyData[3][1][i])
@@ -196,9 +201,27 @@ end
         -- },
     -- },
 -- }
-function Slippy:GetQAData(slot, index)
-	local sName, sLink = GetItemInfo(slippyData[slot][13][index])
+function Slippy:GetQAData(slot, enchant)
+	if not QAAPI_STATUS then 
+		print("Error[Slippy:GetQAData]: No QA scan data found.")
+	return nil end
+	
+	local sName, sLink = GetItemInfo(slippyData[slot][13][enchant])
 	return QAAPI:GetData(sLink)
+end
+
+-- Parameters: Slot and Enchant number for slippyData[slot][#][enchant]
+-- Returns the profit based off the lowest buyout price according to QA
+function Slippy:CalcProfit(slot, enchant)
+	local tbl = Slippy:GetQAData(slot, enchant)
+	local profit
+	
+	if not pcall(function() return tbl.records[1].buyout end) then 
+		self:Print("Error[Slippy:CalcProfit]: No QA scan data found.")
+	return end
+	
+	profit = math.floor(tbl.records[1].buyout/10000 - slippyData[slot][12][enchant] + 0.5)
+	return profit
 end
 
 -- converts an itemID into the name of the item. For example,

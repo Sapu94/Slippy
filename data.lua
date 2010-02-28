@@ -1,5 +1,5 @@
 local twoH = {}		-- has 2 entries
-twoH[0] = {"Greater Savagery","Massacre"}		-- name of enchant
+twoH[0] = {"Greater Savagery", "Massacre"}		-- name of enchant
 twoH[1] = {false, false}						-- status of checkbox - queued to be made? (true / false)
 twoH[2] = {6, 40}								-- infinite dust
 twoH[3] = {2, 6}								-- greater cosmic essences
@@ -11,8 +11,8 @@ twoH[8] = {0, 0}								-- crystallized water
 twoH[9] = {0, 0}								-- eternal earth
 twoH[10] = {0, 0}								-- eternal air
 twoH[11] = {0, 0}								-- titansteel bar
-twoH[12] = {0, 0}								-- cost
-twoH[13] = {38992, 44463}						-- ItemID
+twoH[12] = {100, 0}								-- cost
+twoH[13] = {38992, 44463}						-- ItemID of corresponding scroll
 
 local boots = {}		-- has 8 entries
 boots[0] = {"Icewalker", "Greater Spirit", "Greater Fortitude", "Superior Agility", "Greater Assault", "Assault",
