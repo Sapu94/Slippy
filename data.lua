@@ -11,7 +11,7 @@ twoH[8] = {0, 0}								-- crystallized water
 twoH[9] = {0, 0}								-- eternal earth
 twoH[10] = {0, 0}								-- eternal air
 twoH[11] = {0, 0}								-- titansteel bar
-twoH[12] = {100, 0}								-- cost
+twoH[12] = {0, 0}								-- cost
 twoH[13] = {38992, 44463}						-- ItemID of corresponding scroll
 
 local boots = {}		-- has 8 entries
